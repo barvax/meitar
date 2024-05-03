@@ -43,18 +43,22 @@ body, html {
 
 header {
     text-align: center;
-    padding: 20px;
+ 
+
     background-color:#a73742;
     color: white;
    position: fixed;
    top: 0;
    width: 100%;
    z-index: 999;
+   left: 0;
+   padding-bottom: 20px;
 }
 
 header input[type="search"] {
     width: 50%;
     padding: 10px;
+   
 }
 
 img {
