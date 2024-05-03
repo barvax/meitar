@@ -21,3 +21,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+   
+    const searchInput = document.querySelector('input[type="search"]');
+    const logo = document.querySelector('img.logo'); // Ensure the logo has the class 'logo'
+
+    // Event when the search input is focused
+    searchInput.addEventListener('focus', function() {
+        logo.style.display = 'none'; // Hides the logo
+       
+    });
+
+    // Event when the search input loses focus
+    searchInput.addEventListener('blur', function() {
+        logo.style.display = ''; // Restores the logo display
+    });
+
