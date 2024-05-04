@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>נותני שירותים מיתר</title>
@@ -19,133 +21,20 @@
     </div>
     <header>
         <h1>נותני שירותים מיתר</h1>
-        <input type="search" placeholder="Search...">
+        <input type="search" id ='searchbar' placeholder="Search...">
   
     </header>
-    <img src="images/1.jpeg" alt="Main Image" class="logo">
+    <img src="images/1.jpeg" alt="Main Image" id='logo' class="logo">
     <div class="main">
         <h2>Our Services</h2>
-        <section class="cards">
-           
-            <div class="card">
-                <h3>נוטריון</h3>
-               <a href="page1.html"> <img class="icons" src="images/briefcase-solid.svg" alt=""></a>
-                <p>נוטריון ועריכת דין</p>
-            </div>
-            <div class="card">
-                <h3>אימון גופני</h3>
-                <img class="icons" src="images/fitness_center_FILL0_wght400_GRAD0_opsz24.svg" alt="">
-                <p>אימונים אישיים, יוגה,פילטיס</p>
-            </div>
-            <div class="card">
-                <h3>מזון</h3>
-                <img class="icons" src="images/pizza-slice-solid.svg" alt="">
-                <p> אוכל ביתי ולאירועים</p>
-            </div>
-            <div class="card">
-                <h3>חשמל</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p>חשמלאים, עבודות חשמל טכנאים</p>
-            </div>
-            <div class="card">
-                <h3>איבחון דידקטי</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>איפור</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>ביבי סיטר</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>בעלי חיים</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>גינון</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>דוגי סיטר</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>דוד שמש וקולטים</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>הנדימן</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>זגג</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>חוג</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>טיפוח הגוף</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>טיפוח ציפורניים</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>ירקניה</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>לימוד נהיגה</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>מוצרי חשמל</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>מוצרי קודש</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>מורה פרטי </h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>מחשבים</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-            <div class="card">
-                <h3>מיזוג</h3>
-                <img class="icons" src="images/plug-circle-check-solid.svg" alt="">
-                <p></p>
-            </div>
-
-        </section>
+        <section class="cards"></section>
     </div>
+    <div id="page1">
+     
+    </div>
+    <div id="page2">
 
+    </div>
     <footer>
         <p>© 2024 תושבי מיתר</p>
     </footer>
