@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeDynamicElements();
 });
 
+
 // Fetch and process Excel data
 async function loadData() {
     try {
@@ -17,6 +18,7 @@ async function loadData() {
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
         db = XLSX.utils.sheet_to_json(worksheet);
+        
         return db.reduce(reduceFields, {});
     } catch (error) {
         console.error('Error loading the Excel file:', error);
@@ -34,6 +36,9 @@ function reduceFields(acc, person) {
     return acc;
 }
 
+
+let GLOBALFIELD = ""
+
 // Load and display the main list of cards
 function loadMainList(fieldCounts) {
     // const page1 = document.getElementById('page1');
@@ -42,42 +47,51 @@ function loadMainList(fieldCounts) {
     // }
 
     const cardsContainer = document.querySelector('.cards');
-    cardsContainer.innerHTML = '';
+    if(cardsContainer!==null){
+        cardsContainer.innerHTML = '';
+        Object.entries(fieldCounts).forEach(([field, count]) => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h3>${field}</h3>
+                <p>מספר נותני שירות בתחום: ${count}</p>
+             
+            `;
+            card.onclick = function() {
+            
+                moveToPage2(field);  
+              
+            };
+            cardsContainer.appendChild(card);
+        });
+    }
+  
 
-    Object.entries(fieldCounts).forEach(([field, count]) => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <h3>${field}</h3>
-            <p>מספר נותני שירות בתחום: ${count}</p>
-         
-        `;
-        card.onclick = function() {
-            moveToPage2(field);  
-          
-        };
-        cardsContainer.appendChild(card);
-    });
+
 }
 
 // Initialize dynamic elements (search bar and logo)
 function initializeDynamicElements() {
     const searchInput = document.querySelector('input[type="search"]');
     const logo = document.getElementById('logo');
+    if(searchInput!==null){
+      
+    
+        searchInput.addEventListener('focus', function() {
+            logo.style.display = 'none';
+        });
+    
+        searchInput.addEventListener('blur', function() {
+            logo.style.display = '';
+            // searchInput.value=""
+        });
+    
+        // Event listener for search bar input to filter cards
+        searchInput.addEventListener('input', function() {
+            filterCards(searchInput.value);
+        });
+    }
 
-    searchInput.addEventListener('focus', function() {
-        logo.style.display = 'none';
-    });
-
-    searchInput.addEventListener('blur', function() {
-        logo.style.display = '';
-        // searchInput.value=""
-    });
-
-    // Event listener for search bar input to filter cards
-    searchInput.addEventListener('input', function() {
-        filterCards(searchInput.value);
-    });
 }
 
 // Filter cards based on search input
@@ -92,34 +106,47 @@ function filterCards(filterText) {
         }
     });
 }
-function moveToPage2(field){
-    console.log("Selected field:", field);
-    const cardsContainer = document.querySelector('.cards');
-    cardsContainer.innerHTML = '';  // Clear existing content
 
-    // Filter db for entries matching the specified field
-    const matchingEntries = db.filter(person => person.field === field);
 
-    // Check if matching entries exist
-    if (matchingEntries.length === 0) {
-        cardsContainer.innerHTML = `<p>No entries found for the field: ${field}</p>`;
-        return;
+function moveToPage2(field) {
+    GLOBALFIELD=field
+    console.log(GLOBALFIELD)
+   window.location.href = `index1.html?field=${encodeURIComponent(field)}`;
+ 
+  //  moveToPage2(field)
+  
+    // console.log("Selected field:", field);
+    // const cardsContainer = document.querySelector('.cards');
+    // cardsContainer.innerHTML = '';  // Clear existing content
+
+    // const matchingEntries = db.filter(person => person.field === field);
+
+    // if (matchingEntries.length === 0) {
+    //     cardsContainer.innerHTML = `<p>No entries found for the field: ${field}</p>`;
+    //     return;
+    // }
+
+    // matchingEntries.forEach(person => {
+    //     const card = document.createElement('div');
+    //     card.className = 'card';
+    //     card.innerHTML = `
+    //         <h3>${person.name}</h3>
+    //         <p>Cell: ${person.cellPhone}</p>
+    //         <p>Email: ${person.mail}</p>
+    //         <p>Business: ${person.buisness}</p>
+    //         <p>Field: ${person.field}</p>
+    //         <p>Description: ${person.description}</p>
+    //         <p>Website: <a href="${formatLink(person.linkToSite)}" target="_blank">${person.linkToSite}</a></p>
+    //         <p>Phone: <a href="tel:${person.phone}">${person.phone}</a></p>
+    //     `;
+    //     cardsContainer.appendChild(card);
+    // });
+    
+}
+
+function formatLink(url) {
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        return `http://${url}`;
     }
-
-    // Create and append new cards for each matching entry
-    matchingEntries.forEach(person => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <h3>${person.name}</h3>
-            <p>Cell: ${person.cellPhone}</p>
-            <p>Email: ${person.mail}</p>
-            <p>Business: ${person.buisness}</p>
-            <p>Field: ${person.field}</p>
-            <p>Description: ${person.description}</p>
-            <p>Website: <a href="${person.linkToSite}" target="_blank">${person.linkToSite}</a></p>
-            <p>Phone: ${person.phone}</p>
-        `;
-        cardsContainer.appendChild(card);
-    });
+    return url;
 }

@@ -16,7 +16,10 @@ body, html {
     cursor: pointer;
     z-index: 1000;
 }
-
+.home{
+    width: 20px;
+  
+}
 .menu-content.hidden {
     display: none;
 }
