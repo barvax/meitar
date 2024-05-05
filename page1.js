@@ -20,14 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadDataAndDisplay(field) {
-    // Here you would implement the function that loads and displays the data
-    // based on the 'field' value received from the previous page
+    
     console.log("Load and display data for:", field);
     newParamField=field
-    // Example:
-    // fetch('data/source', { method: 'GET' })
-    // .then(response => response.json())
-    // .then(data => console.log(data));
+
 }
 
 
@@ -48,12 +44,18 @@ async function loadData() {
     
 }
 
-function test(){
+function test() {
     console.log("Selected field:", newParamField);
     const cardsContainer = document.querySelector('.cards1');
     cardsContainer.innerHTML = '';  // Clear existing content
 
-    const matchingEntries = db.filter(person => person.field=== newParamField);
+    let matchingEntries = db.filter(person => person.field === newParamField);
+
+    matchingEntries.sort((a, b) => {
+        const nameA = a.name ? a.name.toUpperCase() : '';
+        const nameB = b.name ? b.name.toUpperCase() : '';
+        return nameA.localeCompare(nameB);
+    });
 
     if (matchingEntries.length === 0) {
         cardsContainer.innerHTML = `<p>No entries found for the field: ${newParamField}</p>`;
@@ -63,30 +65,39 @@ function test(){
     matchingEntries.forEach(person => {
         const card = document.createElement('div');
         card.className = 'card';
+        const websiteLink = formatLink(person.linkToSite);
         card.innerHTML = `
             <h3>${person.name || 'No Name Provided'}</h3>
-            <p>Email: <a href="mailto:${person.mail || '#'}">${person.mail || 'No Email'}</a></p>
-            <p>שם העסק: ${person.business || 'No Business'}</p>
-            <p>תחום: ${person.field || 'No Field'}</p>
-            <p>${person.description || 'No Description'}</p>
-            <p>אתר: <a href="${formatLink(person.linkToSite)}" target="_blank">${formatLink(person.linkToSite)}</a></p>
-            <p>טלפון: <a href="tel:${person.phone || '#'}">${person.phone || 'No Phone'}</a></p>
+          
+            <h4> ${person.business || 'No Business'}</h4>
+            
+            <p >${person.description || 'No Description'}</p>
+            <div class='div-icons'> 
+            ${
+                person.mail ? `<p> <a href="mailto:${person.mail}"><img class='small-icon' src='images/mail.svg' alt='Email'></a></p>` : ''
+            }
+            <p> ${
+                websiteLink !== "No Website" 
+                ? `<a href="${websiteLink}" target="_blank"><img class='small-icon' src='images/site.svg'></a>`
+                : ''
+            }</p>
+            </div>
+         
+            <p style="font-size: 1.5em;"> ${
+                person.phone ? `<a href="tel:${person.phone}">${person.phone}</a>` : 'No Phone'
+            }</p>
         `;
         cardsContainer.appendChild(card);
     });
-    
+
+    let serviseTitle = document.getElementById('serviseTitle');
+    serviseTitle.innerHTML=newParamField;
 }
 
-
 function formatLink(url) {
-   
-    if (!url) {
-        return '';
-    }
-  
+    if (!url) return "No Website";
     if (!url.startsWith('http://') && !url.startsWith('https://')) {
         return `http://${url}`;
     }
-  
     return url;
 }

@@ -37,14 +37,10 @@ function reduceFields(acc, person) {
 }
 
 
-let GLOBALFIELD = ""
 
-// Load and display the main list of cards
+
 function loadMainList(fieldCounts) {
-    // const page1 = document.getElementById('page1');
-    // if (!page1.querySelector('.main')) {
-    //     page1.innerHTML = "";
-    // }
+    
 
     const cardsContainer = document.querySelector('.cards');
     if(cardsContainer!==null){
@@ -112,41 +108,7 @@ function moveToPage2(field) {
     GLOBALFIELD=field
     console.log(GLOBALFIELD)
    window.location.href = `index1.html?field=${encodeURIComponent(field)}`;
- 
-  //  moveToPage2(field)
-  
-    // console.log("Selected field:", field);
-    // const cardsContainer = document.querySelector('.cards');
-    // cardsContainer.innerHTML = '';  // Clear existing content
 
-    // const matchingEntries = db.filter(person => person.field === field);
-
-    // if (matchingEntries.length === 0) {
-    //     cardsContainer.innerHTML = `<p>No entries found for the field: ${field}</p>`;
-    //     return;
-    // }
-
-    // matchingEntries.forEach(person => {
-    //     const card = document.createElement('div');
-    //     card.className = 'card';
-    //     card.innerHTML = `
-    //         <h3>${person.name}</h3>
-    //         <p>Cell: ${person.cellPhone}</p>
-    //         <p>Email: ${person.mail}</p>
-    //         <p>Business: ${person.buisness}</p>
-    //         <p>Field: ${person.field}</p>
-    //         <p>Description: ${person.description}</p>
-    //         <p>Website: <a href="${formatLink(person.linkToSite)}" target="_blank">${person.linkToSite}</a></p>
-    //         <p>Phone: <a href="tel:${person.phone}">${person.phone}</a></p>
-    //     `;
-    //     cardsContainer.appendChild(card);
-    // });
     
 }
 
-function formatLink(url) {
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-        return `http://${url}`;
-    }
-    return url;
-}
