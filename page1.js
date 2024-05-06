@@ -64,8 +64,10 @@ function test() {
 
     matchingEntries.forEach(person => {
         const card = document.createElement('div');
-        card.className = 'card';
+        card.className = 'card1';
         const websiteLink = formatLink(person.linkToSite);
+        const watsappLink = formatLink(person.whatsApp);
+        const flayer = formatLink(person.flayer);
         card.innerHTML = `
             <h3>${person.name || 'No Name Provided'}</h3>
           
@@ -81,11 +83,22 @@ function test() {
                 ? `<a href="${websiteLink}" target="_blank"><img class='small-icon' src='images/site.svg'></a>`
                 : ''
             }</p>
+            <p> ${
+                watsappLink !== "No Website" 
+                ? `<a href="${watsappLink}" target="_blank"><img class='small-icon' src='images/whatsapp.svg'></a>`
+                : ''
+            }</p>
+            <p> ${
+                flayer !== "No Website" 
+                ? `<a href="${flayer}" target="_blank"><img class='small-icon' src='images/store.svg'></a>`
+                : ''
+            }</p>
             </div>
          
             <p style="font-size: 1.5em;"> ${
                 person.phone ? `<a href="tel:${person.phone}">${person.phone}</a>` : 'No Phone'
             }</p>
+         
         `;
         cardsContainer.appendChild(card);
     });

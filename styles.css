@@ -82,9 +82,11 @@ img {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 20px;
+    
 }
 .cards1{
     direction: rtl;
+    
 }
 
 .card {
@@ -93,7 +95,7 @@ img {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     text-align: center;
     font-size: 0.8em;
-   
+  
 }
 .card1 {
     background-color: white;
@@ -101,10 +103,8 @@ img {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     text-align: center;
     font-size: 1.4em;
-    margin:30px;
-   
+    margin: 25px;
 }
-
 footer {
     text-align: center;
     padding: 10px;
